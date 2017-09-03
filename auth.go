@@ -8,7 +8,9 @@ import (
 	"net/url"
 )
 
-type clientType struct{ id, secret string }
+type clientType struct {
+	id, secret string
+}
 
 var (
 	ANDROID = &clientType{"2274003", "hHbZxrka2uZ6jB1inYsH"}
