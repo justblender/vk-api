@@ -47,7 +47,7 @@ for {
     }
 
     for _, message := range messages {
-        if message.HasFlag(vk_api.CHAT) {
+        if message.HasFlag(vk_api.FLAG_CHAT) {
             fmt.Printf("New message from chat %d: %s\n", message.PeerID, message.Text)
         }
     }

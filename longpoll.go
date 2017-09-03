@@ -8,22 +8,21 @@ import (
 	"net/url"
 )
 
-const flagNewMessage = 4
-
-// What should I say here?
 type flag int
 
+const flagNewMessage = 4
+
 const (
-	UNREAD flag = 1 << iota
-	OUTBOX
-	REPLIED
-	IMPORTANT
-	CHAT
-	FRIENDS
-	SPAM
-	DELETED
-	FIXED
-	MEDIA
+	FLAG_UNREAD flag = 1 << iota
+	FLAG_OUTBOX
+	FLAG_REPLIED
+	FLAG_IMPORTANT
+	FLAG_CHAT
+	FLAG_FRIENDS
+	FLAG_SPAM
+	FLAG_DELETED
+	FLAG_FIXED
+	FLAG_MEDIA
 )
 
 // LongPoll is a structure of data for long poll to properly work
