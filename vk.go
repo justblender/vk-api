@@ -19,13 +19,14 @@ type Client struct {
 	AccessToken string
 }
 
-// RequestParameters is just a convenient mask for map[string]interface{}
+// RequestParameters is an alias for map[string]interface{}
 type RequestParameters map[string]interface{}
 
 // NewClient returns an API structure and takes access token, error is returned if something goes wrong
-func NewClient(accessToken string) (*Client, error) {
-	if accessToken == "" {
-		return nil, errors.New("Invalid access token")
+func NewClient(authType authentication) (*Client, error) {
+	accessToken, err := authType.retrieveAccessToken()
+	if err != nil {
+		return nil, err
 	}
 	return &Client{accessToken}, nil
 }
@@ -65,12 +66,12 @@ func (client *Client) Request(method string, parameters RequestParameters) ([]by
 		}
 
 		json.Unmarshal(*err, &errorData)
-		return nil, errors.New(fmt.Sprintf("error #%d: %s", errorData.Code, errorData.Message))
+		return nil, fmt.Errorf("error #%d: %s", errorData.Code, errorData.Message)
 	}
 
 	if response, ok := requestResponse["response"]; ok {
 		return response.MarshalJSON()
 	}
-	return nil, errors.New("No response returned")
+	return nil, errors.New("no response returned")
 
 }

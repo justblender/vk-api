@@ -16,7 +16,13 @@ import (
 )
 
 func main() {
-    client, err := vk_api.Authenticate(os.Getenv("login"), os.Getenv("password"), vk_api.ANDROID)
+    // Use either one of three types: NoAuthentication, DirectAuthentication and ClientCredentialsFlow
+    client, err := vk_api.NewClient(vk_api.DirectAuthentication{
+        Login: os.Getenv("login"),
+        Password: os.Getenv("password"),
+        Device: vk_api.ANDROID,
+    })
+
     if err != nil {
         panic("Couldn't authenticate, sad!")
     }

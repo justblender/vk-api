@@ -2,10 +2,10 @@ package vk_api
 
 import (
 	"bytes"
-	"mime/multipart"
-	"os"
 	"io"
+	"mime/multipart"
 	"net/http"
+	"os"
 )
 
 // UploadFile explains itself by the name, right?
