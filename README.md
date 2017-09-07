@@ -18,7 +18,7 @@ import (
 func main() {
     // Use either one of three types: NoAuthentication, DirectAuthentication and ClientCredentialsFlow
     client, err := vk_api.NewClient(vk_api.DirectAuthentication{
-        Login: os.Getenv("login"),
+        Username: os.Getenv("username"),
         Password: os.Getenv("password"),
         Device: vk_api.ANDROID,
     })
