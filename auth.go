@@ -47,10 +47,10 @@ type ClientCredentialsFlow struct {
 }
 
 func (no NoAuthentication) retrieveAccessToken() (accessToken string, err error) {
-	if no.AccessToken != "" {
-		return no.AccessToken, nil
+	if no.AccessToken == "" {
+		err = errors.New("invalid access token")
 	}
-	err = errors.New("invalid access token")
+	accessToken = no.AccessToken
 	return
 }
 
@@ -111,12 +111,10 @@ func retrieveAccessToken(typ string, values url.Values) (accessToken string, err
 	switch {
 	case authResponse.Error != "":
 		err = errors.New(authResponse.ErrorDescription)
-		return
 	case authResponse.AccessToken == "":
 		err = errors.New("invalid access token")
-		return
-
 	default:
-		return authResponse.AccessToken, nil
+		accessToken = authResponse.AccessToken
 	}
+	return
 }
