@@ -130,5 +130,5 @@ func (longPoll *LongPoll) Poll() ([]Message, error) {
 
 // HasFlag returns true if message contains specified flag and false if not
 func (message Message) HasFlag(flag flag) bool {
-	return int(message.Flags)&int(flag) != 1
+	return int(message.Flags)&int(flag) != 0
 }
